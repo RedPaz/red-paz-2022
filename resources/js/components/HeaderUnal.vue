@@ -1,11 +1,74 @@
 <script setup lang="ts">
-  const cx = '008572255874373046644:chip1p1uf-4';
-  const gcse = document.createElement('script');
-  gcse.type = 'text/javascript';
-  gcse.async = true;
-  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-  '//www.google.com/cse/cse.js?cx=' + cx;
-  const s = document.getElementsByTagName('script')[0];
+  // const cx = '008572255874373046644:chip1p1uf-4';
+  // const gcse = document.createElement('script');
+  // gcse.type = 'text/javascript';
+  // gcse.async = true;
+  // gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+  // '//www.google.com/cse/cse.js?cx=' + cx;
+  // const s = document.getElementsByTagName('script')[0];
+
+import { HeaderItem } from '../interfaces';
+
+const headerItems: HeaderItem[] = [
+  {
+    label: 'Inicio',
+    src: '#',
+    subItems: [],
+  },
+  {
+    label: 'Sobre Nosotros',
+    src: '#',
+    subItems: [],
+  },
+  {
+    label: 'Experiencias de Paz',
+    src: '#',
+    subItems: [
+      { label: 'Iniciativas RedPaz Unal', src: '#' },
+      { label: 'Proyectos de Docencia', src: '#' },
+      { label: 'Proyectos de Investigación', src: '#' },
+      { label: 'Proyectos de Extensión', src: '#' },
+    ],
+  },
+  {
+    label: 'Experiencias de Paz',
+    src: '#',
+    subItems: [
+      { label: 'Sistema Integral para la Paz', src: '#' },
+      { label: 'Entidades Gubernamentales', src: '#' },
+      { label: 'Organismos Internacionales', src: '#' },
+    ],
+  },
+  {
+    label: 'Recursos',
+    src: '#',
+    subItems: [
+      { label: 'Formación y cursos de extensión', src: '#' },
+      { label: 'Publicaciones', src: '#' },
+    ],
+  },
+  {
+    label: 'Contacto',
+    src: '#',
+    subItems: [],
+  },
+  {
+    label: 'Sedes',
+    src: '#',
+    subItems: [
+      { label: 'Amazonía', src: 'https://www.imani.unal.edu.co/' },
+      { label: 'Bogotá', src: 'https://bogota.unal.edu.co/' },
+      { label: 'Caribe', src: 'https://caribe.unal.edu.co/' },
+      { label: 'Manizales', src: 'https://www.manizales.unal.edu.co/' },
+      { label: 'Medellín', src: 'https://medellin.unal.edu.co/' },
+      { label: 'Caribe', src: 'https://caribe.unal.edu.co/' },
+      { label: 'Orinoquía', src: 'https://orinoquia.unal.edu.co/' },
+      { label: 'Palmira', src: 'https://www.palmira.unal.edu.co/' },
+      { label: 'Tumaco', src: 'https://www.tumaco-pacifico.unal.edu.co/' },
+    ],
+  },
+];
+
 </script>
 
 <template>
@@ -42,171 +105,52 @@
     </div>
 
     <div id="menu-FCH" class="navbar-collapse navigation collapse">
-        <div class="menu-superior clearfix">
-            <div class="url-humanas">
-                <a href="http://redpaz.unal.edu.co/2017/" class="url-site">redpaz.unal.edu.co</a>
-            </div>
-            <div class="buscador">
-                <!-- <gcse:searchbox-only resultsurl="https://unal.edu.co/resultados-de-la-busqueda/"></gcse:searchbox-only> -->
-            </div>
+      <div class="menu-superior clearfix">
+        <div class="url-humanas">
+          <a href="http://redpaz.unal.edu.co/2017/" class="url-site">redpaz.unal.edu.co</a>
         </div>
-        <div class="escudo_colombia hidden-xs">
-            <img src="/images/header-unal/escudoColombia.png" alt="Escudo de la República de Colombia" title="Escudo de la República de Colombia" height="66" with="66"/>
-        </div>
-        <ul class="items-menu clearfix">
-            <li class="item">
-                <a href="https://www.humanas.unal.edu.co/2017/" class="item-name">Inicio</a>
+        <!-- <div class="buscador">
+          <gcse:searchbox-only resultsurl="https://unal.edu.co/resultados-de-la-busqueda/"></gcse:searchbox-only>
+        </div> -->
+      </div>
+      <div class="escudo_colombia hidden-xs">
+        <img src="/images/header-unal/escudoColombia.png" alt="Escudo de la República de Colombia" title="Escudo de la República de Colombia" height="66" with="66"/>
+      </div>
+
+      <ul class="items-menu clearfix">
+        <li
+          v-for="(item, index) in headerItems"
+          :key="index"
+          class="item"
+          :class="{ 'has_submenu': item.subItems!.length > 0 }"
+        >
+          <a
+            :href="item.src"
+            class="item-name"
+          >
+            {{ item.label }}
+
+            <fa
+              v-if="item.subItems!.length > 0"
+              icon="caret-down"
+              class="ml-2"
+            />
+          </a>
+
+          <ul
+            v-if="item.subItems!.length > 0"
+            class="item_submenu"
+          >
+            <li
+              v-for="(subitem, index) in item.subItems"
+              :key="index"
+              class="sub-item"
+            >
+              <a :href="subitem.src">{{ subitem.label }}</a>
             </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Facultad <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/la-facultad/historia">La Facultad</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/directivas/decanatura">Directivas</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/internacionalizacion/quienes-somos">Convenios y movilidad</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/internacionalizacion/comunicaciones">Comunicaciones</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/consejos-y-comites/consejo-de-facultad">Consejos y Comités</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/docentes/">Docentes</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/unidad-administrativa/quienes-somos">Unidad Administrativa</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/mejoramiento-continuo">Programa Mejoramiento Contínuo</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/facultad/infraestructura/edificios">Edificios</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/directorio/decanatura">Directorio</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Estudiar en la Facultad <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/estudiar-en-la-facultad/areas-curriculares">Áreas curriculares</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/estudiar-en-la-facultad/pregrados">Pregrados</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/estudiar-en-la-facultad/especializaciones">Especializaciones</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/estudiar-en-la-facultad/maestrias">Maestrías</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/estudiar-en-la-facultad/doctorados">Doctorados</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/extension/programa-de-extension-y-educacion-continua">Educación Contínua</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Unidades Académicas <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/unidades-academicas/departamentos/">Departamentos</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/unidades-academicas/escuelas/">Escuelas</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/unidades-academicas/centros/">Centros</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/unidades-academicas/institutos/">Institutos</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="https://www.humanas.unal.edu.co/2017/bienestar/" class="item-name">Bienestar <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/bienestar/gestion-y-fomento-socioeconomico/presentacion">Gestión y fomento socioeconómico</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/bienestar/acompanamiento-integral/presentacion">Acompañamiento integral</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/bienestar/cultura-y-deporte/presentacion">Cultura y deporte</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/bienestar/proyectos-estudiantiles/presentacion">Proyectos estudiantiles</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/bienestar/egresados/presentacion">Egresados</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Extensión <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/extension/servicio-de-atencion-psicologica">Servicio de Atención Psicológica</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/extension/programa-de-extension-y-educacion-continua">Programa de Extensión y Educación Contínua</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Investigación <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/investigacion/grupos-de-investigacion">Grupos de Investigación</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/investigacion/laboratorios">Laboratorios</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.humanas.unal.edu.co/2017/investigacion/centro-editorial">Centro Editorial</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="item has_submenu">
-                <a href="#" class="item-name">Sedes <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                <ul class="item_submenu">
-                    <li class="sub-item">
-                        <a href="https://www.imani.unal.edu.co/">Amazonía</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://bogota.unal.edu.co/">Bogotá</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://caribe.unal.edu.co/">Caribe</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.manizales.unal.edu.co/">Manizales</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://medellin.unal.edu.co/">Medellín</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://orinoquia.unal.edu.co/">Orinoquía</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.palmira.unal.edu.co/">Palmira</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="https://www.tumaco-pacifico.unal.edu.co/">Tumaco</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+          </ul>
+        </li>
+      </ul>
     </div>
   </header>
 </template>
@@ -518,7 +462,6 @@
   padding: 0;
   position: absolute;
   text-transform: initial;
-  top: 100%;
   visibility: hidden;
   z-index: 10;
   -webkit-transition: all 0.25s ease-in;
@@ -542,14 +485,6 @@
 #header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a:focus {
   background-color: #555;
   outline: none;
-}
-#header-unal #menu-FCH .items-menu .item:nth-child(3),
-#header-unal #menu-FCH .items-menu .item:nth-child(4) {
-  position: relative;
-}
-#header-unal #menu-FCH .items-menu .item:nth-child(3) .item_submenu,
-#header-unal #menu-FCH .items-menu .item:nth-child(4) .item_submenu {
-  min-width: 100%;
 }
 #header-unal #menu-FCH .items-menu .item:last-child {
   float: right;

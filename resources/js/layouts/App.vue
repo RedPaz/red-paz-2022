@@ -10,6 +10,8 @@ import FooterUnal from '../components/FooterUnal.vue';
     
     <div class="main-content">
       <router-view/>
+      <!-- Notifications -->
+      <notifications position="bottom left"/>
     </div>
 
     <FooterUnal/>

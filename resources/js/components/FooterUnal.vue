@@ -100,7 +100,7 @@
 }
 
 .logos {
-  @apply grid grid-cols-4 gap-1 items-center xl:grid-cols-2 p-4;
+  @apply grid grid-cols-4 gap-1 items-center p-4 xl:grid-cols-2 xl:p-0;
 }
 
 a {

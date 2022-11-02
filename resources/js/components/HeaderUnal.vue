@@ -1,74 +1,28 @@
 <script setup lang="ts">
-  // const cx = '008572255874373046644:chip1p1uf-4';
-  // const gcse = document.createElement('script');
-  // gcse.type = 'text/javascript';
-  // gcse.async = true;
-  // gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-  // '//www.google.com/cse/cse.js?cx=' + cx;
-  // const s = document.getElementsByTagName('script')[0];
+import { computed, ref } from 'vue';
+import useVuelidate from '@vuelidate/core';
+import { HEADER_ITEMS } from '../constants';
+import { required, helpers, minLength } from '@vuelidate/validators';
 
-import { HeaderItem } from '../interfaces';
+const searchQuery = ref('');
 
-const headerItems: HeaderItem[] = [
-  {
-    label: 'Inicio',
-    src: '#',
-    subItems: [],
+const rules = computed(() => ({
+  searchQuery: {
+    required,
+    minLength: helpers.withMessage('Ingrese al menos 3 caracteres', minLength(3)),
   },
-  {
-    label: 'Sobre Nosotros',
-    src: '#',
-    subItems: [],
-  },
-  {
-    label: 'Experiencias de Paz',
-    src: '#',
-    subItems: [
-      { label: 'Iniciativas RedPaz Unal', src: '#' },
-      { label: 'Proyectos de Docencia', src: '#' },
-      { label: 'Proyectos de Investigación', src: '#' },
-      { label: 'Proyectos de Extensión', src: '#' },
-    ],
-  },
-  {
-    label: 'Experiencias de Paz',
-    src: '#',
-    subItems: [
-      { label: 'Sistema Integral para la Paz', src: '#' },
-      { label: 'Entidades Gubernamentales', src: '#' },
-      { label: 'Organismos Internacionales', src: '#' },
-    ],
-  },
-  {
-    label: 'Recursos',
-    src: '#',
-    subItems: [
-      { label: 'Formación y cursos de extensión', src: '#' },
-      { label: 'Publicaciones', src: '#' },
-    ],
-  },
-  {
-    label: 'Contacto',
-    src: '#',
-    subItems: [],
-  },
-  {
-    label: 'Sedes',
-    src: '#',
-    subItems: [
-      { label: 'Amazonía', src: 'https://www.imani.unal.edu.co/' },
-      { label: 'Bogotá', src: 'https://bogota.unal.edu.co/' },
-      { label: 'Caribe', src: 'https://caribe.unal.edu.co/' },
-      { label: 'Manizales', src: 'https://www.manizales.unal.edu.co/' },
-      { label: 'Medellín', src: 'https://medellin.unal.edu.co/' },
-      { label: 'Caribe', src: 'https://caribe.unal.edu.co/' },
-      { label: 'Orinoquía', src: 'https://orinoquia.unal.edu.co/' },
-      { label: 'Palmira', src: 'https://www.palmira.unal.edu.co/' },
-      { label: 'Tumaco', src: 'https://www.tumaco-pacifico.unal.edu.co/' },
-    ],
-  },
-];
+}));
 
+const v$ = useVuelidate(rules, { searchQuery });
+
+/**
+ * Search in Unal page
+ */
+function search() {
+  if (v$.value.$invalid) return;
+  // Redirect to UN search
+  window.location.href = `https://unal.edu.co/resultados-de-la-busqueda/?q=${searchQuery.value}`;
+}
 </script>
 
 <template>
@@ -91,13 +45,13 @@ const headerItems: HeaderItem[] = [
 
     <ul class="social">
       <li class="social-item">
-        <a target="_blank" href="https://www.youtube.com/user/faccienciashumanas" class="youtube"></a>
+        <a target="_blank" href="#" class="youtube"></a>
       </li>
       <li class="social-item">
-        <a target="_blank" href="https://twitter.com/humanasunal" class="twitter"></a>
+        <a target="_blank" href="#" class="twitter"></a>
       </li>
       <li class="social-item">
-        <a target="_blank" href="https://www.facebook.com/humanasunal" class="facebook"></a>
+        <a target="_blank" href="#" class="facebook"></a>
       </li>
     </ul>
 
@@ -107,9 +61,25 @@ const headerItems: HeaderItem[] = [
           <img src="/images/header-unal/ubicacion.png" class="mr-2 mb-1" />
           <a href="http://redpaz.unal.edu.co/2017/">redpaz.unal.edu.co</a>
         </div>
-        <!-- <div class="buscador">
-          <gcse:searchbox-only resultsurl="https://unal.edu.co/resultados-de-la-busqueda/"></gcse:searchbox-only>
-        </div> -->
+
+        <form
+          class="search relative"
+          @submit.prevent="search()"
+        >
+          <input
+            type="text"
+            v-model="searchQuery"
+            placeholder="Buscar en la universidad"
+            class="input-search rounded-md p-1 px-2 w-60 bg-gray-unal-100"
+          >
+          
+          <button
+            type="submit"
+            class="absolute text-white h-full px-2 right-0 top-0 bg-green-unal rounded-tr-md rounded-br-md flex items-center"
+          >
+            <fa icon="search"/>
+          </button>
+        </form>
       </div>
 
       <img
@@ -121,7 +91,7 @@ const headerItems: HeaderItem[] = [
 
       <ul class="items-menu">
         <li
-          v-for="(item, index) in headerItems"
+          v-for="(item, index) in HEADER_ITEMS"
           :key="index"
           class="item"
           :class="{ 'has_submenu': item.subItems!.length > 0 }"
@@ -199,7 +169,7 @@ const headerItems: HeaderItem[] = [
 }
 
 .top-menu {
-  @apply flex justify-between py-1.5;
+  @apply flex justify-between py-1.5 w-[calc(100%-85px)];
 }
 
 .main-url {

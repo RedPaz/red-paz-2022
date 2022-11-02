@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         'gray-unal': {
+          100: '#777777',
           200: '#666666',
           300: '#555555',
           400: '#5b5b5b',

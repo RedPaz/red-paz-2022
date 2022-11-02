@@ -1,8 +1,8 @@
 import 'nprogress/nprogress.css';
 
 import { createApp } from 'vue';
-import router from './router.js';
-import App from './layouts/App.vue';
+import router from '@/router';
+import App from '@/App.vue';
 
 // FontAwesome watch
 import fontAwesome from './plugins/fontAwesome';

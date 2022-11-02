@@ -6,13 +6,13 @@ export default defineConfig({
     plugins: [
         vue(),
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/scripts/main.ts'],
             refresh: true,
         }),
     ],
     resolve: {
         alias: {
-            '@': '/resources/ts',
+            '@': '/resources/scripts',
         },
     },
 });

@@ -2,14 +2,16 @@
 import { computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { HEADER_ITEMS } from '../constants';
+import { notify } from '@kyvg/vue3-notification';
 import { required, helpers, minLength } from '@vuelidate/validators';
 
 const searchQuery = ref('');
+const searchError = 'Ingrese al menos 3 caracteres';
 
 const rules = computed(() => ({
   searchQuery: {
     required,
-    minLength: helpers.withMessage('Ingrese al menos 3 caracteres', minLength(3)),
+    minLength: helpers.withMessage(searchError, minLength(3)),
   },
 }));
 
@@ -19,7 +21,15 @@ const v$ = useVuelidate(rules, { searchQuery });
  * Search in Unal page
  */
 function search() {
-  if (v$.value.$invalid) return;
+  if (v$.value.$invalid) {
+    notify({
+      title: searchError,
+      type: 'error',
+      duration: 1500,
+    });
+
+    return;
+  }
   // Redirect to UN search
   window.location.href = `https://unal.edu.co/resultados-de-la-busqueda/?q=${searchQuery.value}`;
 }

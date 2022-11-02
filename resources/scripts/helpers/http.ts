@@ -1,6 +1,6 @@
 import NProgress from 'nprogress';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { notify } from '@kyvg/vue3-notification';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const httpClient: AxiosInstance = axios.create({
   // baseURL: import.meta.env.VITE_API_URL,

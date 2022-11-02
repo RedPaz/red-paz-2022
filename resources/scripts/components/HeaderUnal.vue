@@ -3,10 +3,14 @@ import { computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { HEADER_ITEMS } from '../constants';
 import { notify } from '@kyvg/vue3-notification';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { required, helpers, minLength } from '@vuelidate/validators';
 
+const showMenu = ref(false);
 const searchQuery = ref('');
 const searchError = 'Ingrese al menos 3 caracteres';
+const isMobile = useBreakpoints(breakpointsTailwind).smaller('sm');
+const currentParent = ref();
 
 const rules = computed(() => ({
   searchQuery: {
@@ -33,24 +37,60 @@ function search() {
   // Redirect to UN search
   window.location.href = `https://unal.edu.co/resultados-de-la-busqueda/?q=${searchQuery.value}`;
 }
+
+/**
+ * Toggle 'showMenu' value and reset 'currentParent'
+ * if current value is true.
+ */
+function toggleMenu() {
+  if (showMenu.value)  currentParent.value = null;
+
+  showMenu.value = !showMenu.value;
+}
+
+/**
+ * Toggle or update 'currentParent' value after
+ * click on menu item in mobile screens.
+ * @param index => Index to select
+ */
+function setCurrentParent(index: number) {
+  if (!isMobile.value) return;
+
+  if (currentParent.value === index) {
+    currentParent.value = null;
+    return;
+  }
+
+  currentParent.value = index;
+}
 </script>
 
 <template>
   <header id="header-unal">
     <div class="headerUN">
       <div class="shield">
-        <img src="/images/header-unal/sealBck.png" alt="Fondo Escudo" title="Fondo Escudo" class="hidden-xs">
+        <img src="/images/header-unal/sealBck.png" alt="Fondo Escudo" title="Fondo Escudo" class="hidden xl:block">
         
         <a href="https://unal.edu.co" class="logo" target="_blank">
-          <img src="/images/header-unal/escudoUnal.svg" alt="Escudo de la Universidad Nacional de Colombia" title="Escudo de la Universidad Nacional de Colombia" class="img-responsive"/>
+          <img src="/images/header-unal/escudoUnal.svg" alt="Escudo de la Universidad Nacional de Colombia" title="Escudo de la Universidad Nacional de Colombia" class="object-fit"/>
         </a>
       </div>
 
-      <!-- <div class="navbar-header">
-        <button class="navbar-toggle" data-target="#menu" data-toggle="collapse" aria-controls="menu" aria-expanded="false" type="button">
-          <span class="icon-bar"></span>
-        </button>
-      </div> -->
+      <button
+        v-if="isMobile"
+        class="mr-4"
+        data-target="#menu" 
+        data-toggle="collapse"
+        aria-controls="menu"
+        aria-expanded="false"
+        type="button"
+        @click="toggleMenu()"
+      >
+        <span
+          class="icon-bar"
+          :class="{ 'active': showMenu }"
+        />
+      </button>
     </div>
 
     <ul class="social">
@@ -65,27 +105,30 @@ function search() {
       </li>
     </ul>
 
-    <div id="menu" class="navbar-collapse navigation collapse">
+    <div 
+      id="menu"
+      v-if="showMenu || !isMobile"
+    >
       <div class="top-menu">
         <div class="main-url">
-          <img src="/images/header-unal/ubicacion.png" class="mr-2 mb-1" />
+          <img src="/images/header-unal/ubicacion.png" class="mb-0 mr-2 lg:mb-1" />
           <a href="http://redpaz.unal.edu.co/2017/">redpaz.unal.edu.co</a>
         </div>
 
         <form
-          class="search relative"
+          class="search relative px-5 my-1"
           @submit.prevent="search()"
         >
           <input
             type="text"
             v-model="searchQuery"
             placeholder="Buscar en la universidad"
-            class="input-search rounded-md p-1 px-2 w-60 bg-gray-unal-100"
+            class="input-search rounded-md p-1 px-2 w-full lg:w-60 bg-gray-unal-100"
           >
           
           <button
             type="submit"
-            class="absolute text-white h-full px-2 right-0 top-0 bg-green-unal rounded-tr-md rounded-br-md flex items-center"
+            class="text-sm right-5 absolute text-white h-full px-2 lg:right-0 top-0 bg-green-unal rounded-tr-md rounded-br-md flex items-center"
           >
             <fa icon="search"/>
           </button>
@@ -104,11 +147,12 @@ function search() {
           v-for="(item, index) in HEADER_ITEMS"
           :key="index"
           class="item"
-          :class="{ 'has_submenu': item.subItems!.length > 0 }"
+          :class="{ 'has-submenu': item.subItems!.length > 0, 'current-item': currentParent === index }"
         >
           <a
             :href="item.src"
             class="item-name"
+            @click="setCurrentParent(index)"
           >
             {{ item.label }}
 
@@ -120,7 +164,7 @@ function search() {
           </a>
 
           <ul
-            v-if="item.subItems!.length > 0"
+            v-if="(isMobile && currentParent === index) || (!isMobile && item.subItems!.length > 0)"
             class="item-submenu"
           >
             <li
@@ -143,7 +187,8 @@ function search() {
 }
 
 .shield {
-  @apply absolute h-[135px] w-[234px] z-10;
+  @apply relative;
+  @apply xl:absolute xl:h-[135px] xl:w-[234px] xl:z-10;
 }
 
 .shield-bg {
@@ -151,11 +196,39 @@ function search() {
 }
 
 .logo {
-  @apply absolute top-1/3 right-1/2 translate-x-1/2 -translate-y-1/3 w-11/12;
+  @apply w-28 block translate-x-0 translate-y-0;
+  @apply xl:top-1/3 xl:right-1/2 xl:translate-x-1/2 xl:-translate-y-1/3 xl:w-11/12 xl:absolute;
+}
+/* Mobile menu */
+.headerUN {
+  @apply flex justify-between items-center w-full;
+}
+.icon-bar {
+  @apply bg-white block duration-200 ease-linear sm:hidden w-6 h-0.5 rounded relative;
+}
+
+.icon-bar::before, .icon-bar::after {
+  @apply bg-white content-[''] absolute w-full h-0.5 -top-1.5 right-0 rounded duration-200 delay-200;
+}
+
+.icon-bar::after {
+  @apply top-1.5;
+}
+
+.icon-bar.active {
+  @apply bg-transparent;
+}
+
+.icon-bar.active::before {
+  @apply top-0 rotate-45;
+}
+
+.icon-bar.active::after {
+  @apply top-0 -rotate-45;
 }
 /* Social */
 .social {
-  @apply bg-gray-unal-400 h-[30px] relative py-0 px-1 m-0 flex justify-end items-center;
+  @apply hidden bg-gray-unal-400 h-[30px] relative py-0 px-1 m-0 xl:flex justify-end items-center;
 }
 
 .social a {
@@ -175,50 +248,60 @@ function search() {
 }
 /* Menu items */
 #menu {
-  @apply ml-60 p-0 relative flex flex-col;
+  @apply bg-gray-unal-500 lg:bg-transparent m-0 p-0 relative flex flex-col xl:ml-60;
 }
 
 .top-menu {
-  @apply flex justify-between py-1.5 w-[calc(100%-85px)];
+  @apply flex flex-col justify-between py-1.5 w-full xl:flex-row xl:w-[calc(100%-85px)];
 }
 
 .main-url {
-  @apply text-white text-2xl relative tracking-wide hover:no-underline flex items-center;
+  @apply w-full text-white text-xl relative tracking-wide px-5 py-1;
+  @apply lg:text-2xl hover:no-underline flex items-center;
 }
 
 .items-menu {
-  @apply flex w-[calc(100%-85px)];
+  @apply w-full lg:w-[calc(100%-85px)];
 }
 
 .items-menu .item {
-  @apply flex font-sans uppercase;
+  @apply flex font-sans uppercase w-full border-b border-b-gray-unal-400 lg:w-auto flex-col;
   @apply hover:bg-gray-unal-300;
   @apply last:ml-auto;
 }
 
 .item-name {
-  @apply relative text-white px-2.5 pt-2 pb-1 no-underline z-10 duration-300 ease-in-out;
+  @apply py-2 px-5 relative text-white lg:px-2.5 lg:pt-2 lg:pb-1 no-underline z-10 duration-300 ease-in-out w-full lg:w-auto flex justify-between;
 }
 
 .item-name .icon {
-  @apply text-green-unal text-xs right-1.5 top-2.5;
+  @apply absolute right-5 text-base top-1/2 -translate-y-1/2 text-green-unal lg:text-xs lg:right-1.5 lg:top-2.5 lg:translate-y-0 duration-150;
+}
+
+.current-item .item-name .icon {
+  @apply rotate-180;
 }
 
 .item-submenu {
-  @apply absolute top-full opacity-0 p-0 invisible z-10 duration-200 ease-in overflow-hidden;
+  @apply relative w-full;
+  @apply lg:absolute lg:top-full lg:opacity-0 lg:p-0 lg:invisible lg:z-10 lg:duration-200 lg:ease-in lg:overflow-hidden;
 }
 
 .items-menu .item:hover .item-submenu {
   @apply opacity-100 visible z-20;
 }
 
+.sub-item {
+  @apply border-b border-b-gray-unal-400 lg:border-0;
+  @apply last:border-0;
+}
 .sub-item a {
-  @apply bg-gray-unal-800 text-sm normal-case text-white block px-4 py-1 no-underline duration-200 ease-in-out;
+  @apply bg-gray-unal-800 text-sm normal-case text-white block py-2 px-5 lg:px-4 lg:py-1 no-underline duration-200 ease-in-out;
   @apply hover:bg-gray-unal-300;
 }
 
 .colombia {
-  @apply absolute right-1.5 top-1.5 w-16 h-16;
+  @apply hidden absolute right-1.5 top-1.5 w-16 h-16 xl:block;
 }
 
  /* @media screen and (max-width: 40em) {

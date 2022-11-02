@@ -7,6 +7,10 @@
     font-family: 'AncizarSans', 'sans-serif';
   }
 
+  body {
+    overflow-x: hidden;
+  }
+
   @font-face {
     font-family: 'AncizarSans';
     src: url('/public/fonts/AncizarSans-Bold.eot');

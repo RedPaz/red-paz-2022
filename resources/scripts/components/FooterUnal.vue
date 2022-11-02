@@ -55,7 +55,7 @@
       <div class="even-column">
         <p>&copy; Copyright 2014</p>
         <p>Algunos derechos reservados.</p>
-        <p><a href="mailto:editorweb_fchbog@unal.edu.co" title="Comuníquese con el webmaster de la Universidad Nacional de Colombia">editorweb_fchbog@unal.edu.co</a></p>
+        <p><a href="mailto:editorweb_fchbog@unal.edu.co" title="Comuníquese con el webmaster de la Universidad Nacional de Colombia">reddepaz_nal@unal.edu.co</a></p>
         <p><a href="https://unal.edu.co/acerca-de-este-sitio-web.html" target="_blank" title="Acerca de la web de la Universidad Nacional de Colombia">Acerca de este sitio web</a></p>
       </div>
     </div>
@@ -80,11 +80,11 @@
 
 <style scoped>
 #footer-unal {
-  @apply bg-gray-unal-200 font-sans p-6 grid grid-cols-1 xl:grid-cols-2 text-sm gap-8 text-gray-200;
+  @apply bg-gray-unal-200 font-sans p-4 grid grid-cols-1 text-sm gap-5 text-gray-200 lg:p-6 lg:gap-8 xl:grid-cols-2;
 }
 
 .general-links, .contact-items {
-  @apply grid gap-8 grid-cols-2 xl:grid-cols-4;
+  @apply grid gap-5 lg:gap-8 grid-cols-2 xl:grid-cols-4;
 }
 
 .contact-items {
@@ -100,7 +100,7 @@
 }
 
 .logos {
-  @apply grid grid-cols-4 gap-1 items-center p-4 xl:grid-cols-2 xl:p-0;
+  @apply grid grid-cols-4 p-0 gap-1 items-center lg:p-4 xl:grid-cols-2 xl:p-0;
 }
 
 a {

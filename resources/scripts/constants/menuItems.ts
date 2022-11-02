@@ -22,7 +22,7 @@ export const HEADER_ITEMS: HeaderItem[] = [
     ],
   },
   {
-    label: 'Experiencias de Paz',
+    label: 'Nuestro Aliados',
     src: '#',
     subItems: [
       { label: 'Sistema Integral para la Paz', src: '#' },

@@ -80,34 +80,34 @@
 
 <style scoped>
 #footer-unal {
-  background-color: #666; 
-  color: #ddd; 
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif; 
-  font-size: 0.85em; 
-  position: relative; 
-  padding: 2rem; 
-  display: grid; 
-  grid-template-columns: repeat(1, minmax(0, 1fr)); 
-  gap: 2rem;
+  @apply bg-gray-unal-200 font-sans p-6 grid grid-cols-1 xl:grid-cols-2 text-sm gap-8 text-gray-200;
 }
-#footer-unal .general-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-#footer-unal .general-links .even-column { text-align: right; }
-#footer-unal .contact-links { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem; }
-#footer-unal .contact-links .contact-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-#footer-unal .contact-links .contact-items .even-column { text-align: right; }
-#footer-unal .contact-links .logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 0.5rem; }
-#footer-unal a { color: #ddd; text-decoration: none; }
-#footer-unal a img { margin: 0 auto; }
-#footer-unal a:hover { color: #ddd; }
-#footer-unal p { margin-bottom: 0; }
 
-@media screen and (min-width: 768px) { #footer-unal .general-links { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  #footer-unal .general-links .even-column { text-align: left; }
-  #footer-unal .contact-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  #footer-unal .contact-links .contact-items .even-column { text-align: left; } }
-@media screen and (min-width: 1280px) { #footer-unal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  #footer-unal .contact-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  #footer-unal .contact-links .contact-items { grid-column: span 2 / span 2; padding: 0 2rem; border: 1px solid #d1d5db; border-top: 0; border-bottom: 0; gap: 0; }
-  #footer-unal .contact-links .contact-items .even-column { text-align: right; }
-  #footer-unal .contact-links .logos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 1rem; } }
+.general-links, .contact-items {
+  @apply grid gap-8 grid-cols-2 xl:grid-cols-4;
+}
+
+.contact-items {
+  @apply xl:grid-cols-2 xl:col-span-2 xl:gap-0 xl:border-x xl:border-x-gray-200 xl:px-6;
+}
+
+.even-column {
+  @apply text-right md:text-left;
+}
+
+.contact-links {
+  @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8;
+}
+
+.logos {
+  @apply grid grid-cols-4 gap-1 items-center xl:grid-cols-2 p-4;
+}
+
+a {
+  @apply text-gray-200 no-underline;
+}
+
+p {
+  @apply mb-0;
+}
 </style>

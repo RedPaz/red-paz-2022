@@ -1,6 +1,99 @@
-@import url('./fonts.css');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: 'AncizarSans', 'sans-serif';
+  }
+
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-Bold.eot');
+    src: url('/public/fonts/AncizarSans-Bold.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-Bold.woff') format('woff'),
+         url('/public/fonts/AncizarSans-Bold.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-Bold.svg#AncizarSans-Bold') format('svg'),
+         url('/public/fonts/AncizarSans-Bold.eot?#iefix') format('embedded-opentype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-BoldItalic.eot');
+    src: url('/public/fonts/AncizarSans-BoldItalic.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-BoldItalic.woff') format('woff'),
+         url('/public/fonts/AncizarSans-BoldItalic.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-BoldItalic.svg#AncizarSans-BoldItalic') format('svg'),
+         url('/public/fonts/AncizarSans-BoldItalic.eot?#iefix') format('embedded-opentype');
+    font-weight: bold;
+    font-style: italic;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-Light.eot');
+    src: url('/public/fonts/AncizarSans-Light.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-Light.woff') format('woff'),
+         url('/public/fonts/AncizarSans-Light.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-Light.svg#AncizarSans-Light') format('svg'),
+         url('/public/fonts/AncizarSans-Light.eot?#iefix') format('embedded-opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-LightItalic.eot');
+    src: url('/public/fonts/AncizarSans-LightItalic.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-LightItalic.woff') format('woff'),
+         url('/public/fonts/AncizarSans-LightItalic.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-LightItalic.svg#AncizarSans-LightItalic') format('svg'),
+         url('/public/fonts/AncizarSans-LightItalic.eot?#iefix') format('embedded-opentype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-Regular.eot');
+    src: url('/public/fonts/AncizarSans-Regular.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-Regular.woff') format('woff'),
+         url('/public/fonts/AncizarSans-Regular.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-Regular.svg#AncizarSans-Regular') format('svg'),
+         url('/public/fonts/AncizarSans-Regular.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-RegularItalic.eot');
+    src: url('/public/fonts/AncizarSans-RegularItalic.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-RegularItalic.woff') format('woff'),
+         url('/public/fonts/AncizarSans-RegularItalic.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-RegularItalic.svg#AncizarSans-RegularItalic') format('svg'),
+         url('/public/fonts/AncizarSans-RegularItalic.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'AncizarSans';
+    src: url('/public/fonts/AncizarSans-Thin.eot');
+    src: url('/public/fonts/AncizarSans-Thin.woff2') format('woff2'),
+         url('/public/fonts/AncizarSans-Thin.woff') format('woff'),
+         url('/public/fonts/AncizarSans-Thin.ttf') format('truetype'),
+         url('/public/fonts/AncizarSans-Thin.svg#AncizarSans-Thin') format('svg'),
+         url('/public/fonts/AncizarSans-Thin.eot?#iefix') format('embedded-opentype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+  }  
+}

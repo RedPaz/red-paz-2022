@@ -7,8 +7,10 @@ import FooterUnal from '../components/FooterUnal.vue';
 <template>
   <section class="red-paz">
     <HeaderUnal/>
-  
-    <router-view/>
+    
+    <div class="main-content">
+      <router-view/>
+    </div>
 
     <FooterUnal/>
   </section>
@@ -19,4 +21,7 @@ import FooterUnal from '../components/FooterUnal.vue';
 </template>
 
 <style scoped>
+.main-content {
+  @apply min-h-[calc(100vh-250px)];
+}
 </style>

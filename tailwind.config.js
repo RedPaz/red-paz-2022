@@ -6,7 +6,24 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ['AncizarSans', 'Helvetica', 'Arial', 'sans-serif'],
+    },
+    extend: {
+      colors: {
+        'gray-unal': {
+          200: '#666666',
+          300: '#555555',
+          400: '#5b5b5b',
+          600: '#383838',
+          800: '#333333',
+        },
+        'green-unal': '#50992e',
+      },
+      backgroundImage: {
+        social: "url('/images/header-unal/redes_sociales.png')"
+      },
+    },
   },
   plugins: [],
 }

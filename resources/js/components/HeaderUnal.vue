@@ -74,50 +74,52 @@ const headerItems: HeaderItem[] = [
 <template>
   <header id="header-unal">
     <div class="headerUN">
-        <div class="escudo">
-            <div class="fondo">
-                <img src="/images/header-unal/sealBck.png" alt="Fondo Escudo" title="Fondo Escudo" class="hidden-xs">
-                <a href="https://unal.edu.co" class="logo" target="_blank">
-                    <img src="/images/header-unal/escudoUnal.svg" alt="Escudo de la Universidad Nacional de Colombia" title="Escudo de la Universidad Nacional de Colombia" class="img-responsive"/>
-                </a>
-            </div>
-        </div>
+      <div class="shield">
+        <img src="/images/header-unal/sealBck.png" alt="Fondo Escudo" title="Fondo Escudo" class="hidden-xs">
+        
+        <a href="https://unal.edu.co" class="logo" target="_blank">
+          <img src="/images/header-unal/escudoUnal.svg" alt="Escudo de la Universidad Nacional de Colombia" title="Escudo de la Universidad Nacional de Colombia" class="img-responsive"/>
+        </a>
+      </div>
 
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-target="#menu-FCH" data-toggle="collapse" aria-controls="menu-FCH" aria-expanded="false" type="button">
-                <span class="icon-bar"></span>
-            </button>
-        </div>
+      <!-- <div class="navbar-header">
+        <button class="navbar-toggle" data-target="#menu" data-toggle="collapse" aria-controls="menu" aria-expanded="false" type="button">
+          <span class="icon-bar"></span>
+        </button>
+      </div> -->
     </div>
 
-    <div class="redes-sociales hidden sm:block">
-        <ul>
-            <li class="social">
-                <a target="_blank" href="https://www.youtube.com/user/faccienciashumanas" class="youtube"></a>
-            </li>
-            <li class="social">
-                <a target="_blank" href="https://twitter.com/humanasunal" class="twitter"></a>
-            </li>
-            <li class="social">
-                <a target="_blank" href="https://www.facebook.com/humanasunal" class="facebook"></a>
-            </li>
-        </ul>
-    </div>
+    <ul class="social">
+      <li class="social-item">
+        <a target="_blank" href="https://www.youtube.com/user/faccienciashumanas" class="youtube"></a>
+      </li>
+      <li class="social-item">
+        <a target="_blank" href="https://twitter.com/humanasunal" class="twitter"></a>
+      </li>
+      <li class="social-item">
+        <a target="_blank" href="https://www.facebook.com/humanasunal" class="facebook"></a>
+      </li>
+    </ul>
 
-    <div id="menu-FCH" class="navbar-collapse navigation collapse">
-      <div class="menu-superior clearfix">
-        <div class="url-humanas">
-          <a href="http://redpaz.unal.edu.co/2017/" class="url-site">redpaz.unal.edu.co</a>
+    <div id="menu" class="navbar-collapse navigation collapse">
+      <div class="top-menu">
+        <div class="main-url">
+          <img src="/images/header-unal/ubicacion.png" class="mr-2 mb-1" />
+          <a href="http://redpaz.unal.edu.co/2017/">redpaz.unal.edu.co</a>
         </div>
         <!-- <div class="buscador">
           <gcse:searchbox-only resultsurl="https://unal.edu.co/resultados-de-la-busqueda/"></gcse:searchbox-only>
         </div> -->
       </div>
-      <div class="escudo_colombia hidden-xs">
-        <img src="/images/header-unal/escudoColombia.png" alt="Escudo de la República de Colombia" title="Escudo de la República de Colombia" height="66" with="66"/>
-      </div>
 
-      <ul class="items-menu clearfix">
+      <img
+        class="colombia"
+        src="/images/header-unal/escudoColombia.png"
+        alt="Escudo de la República de Colombia"
+        title="Escudo de la República de Colombia"
+      />
+
+      <ul class="items-menu">
         <li
           v-for="(item, index) in headerItems"
           :key="index"
@@ -133,13 +135,13 @@ const headerItems: HeaderItem[] = [
             <fa
               v-if="item.subItems!.length > 0"
               icon="caret-down"
-              class="ml-2"
+              class="icon ml-2"
             />
           </a>
 
           <ul
             v-if="item.subItems!.length > 0"
-            class="item_submenu"
+            class="item-submenu"
           >
             <li
               v-for="(subitem, index) in item.subItems"
@@ -157,357 +159,89 @@ const headerItems: HeaderItem[] = [
 
 <style scoped>
 #header-unal {
-  border: none;
-  padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-#header-unal {
-  background-color: #666;
-  position: relative;
-}
-#header-unal .escudo {
-  position: absolute;
-  height: 135px;
-  width: 234px;
-  z-index: 500;
-}
-#header-unal .escudo .fondo {
-  margin-left: 0;
-  position: relative;
-}
-#header-unal .escudo .fondo .logo {
-  left: 0;
-  position: absolute;
-  margin: 0 auto;
-  right: 0;
-  top: 5%;
-  width: 90%;
-}
-#header-unal .redes-sociales {
-  background-color: #5b5b5b;
-  display: block;
-  height: 30px;
-  padding: 5px 5px 0 240px;
-  position: relative;
-}
-#header-unal .redes-sociales ul {
-  margin: 0;
-  padding: 0;
-  text-align: right;
-}
-#header-unal .redes-sociales ul .social {
-  display: inline-block;
-}
-#header-unal .redes-sociales ul .social a {
-  background: url(../../images/header-unal/redes_sociales.png) no-repeat 0 0 transparent;
-  display: block;
-  height: 20px;
-  width: 20px;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-}
-#header-unal .redes-sociales ul .social .facebook {
-  background-position: -42px 0;
-}
-#header-unal .redes-sociales ul .social .facebook:hover {
-  background-position: -42px -21px;
-}
-#header-unal .redes-sociales ul .social .twitter {
-  background-position: -21px 0;
-}
-#header-unal .redes-sociales ul .social .twitter:hover {
-  background-position: -21px -21px;
-}
-#header-unal .redes-sociales ul .social .youtube {
-  background-position: 0 0;
-}
-#header-unal .redes-sociales ul .social .youtube:hover {
-  background-position: 0 -21px;
+  @apply border-none p-0 flex flex-col bg-gray-unal-200 relative;
 }
 
-#header-unal .navbar-header .navbar-toggle {
-  display: none;
+.shield {
+  @apply absolute h-[135px] w-[234px] z-10;
 }
 
-#header-unal #menu-FCH {
-  margin: 0 0 0 240px;
-  padding: 0;
-  position: relative;
-  width: calc(100% - 240px);
-}
-#header-unal #menu-FCH .menu-superior {
-  position: relative;
-  padding: 5px 0;
-  width: calc(100% - 85px);
-}
-#header-unal #menu-FCH .menu-superior .url-humanas {
-  display: inline-block;
-  padding: 0;
-}
-#header-unal #menu-FCH .menu-superior .url-humanas .url-site {
-  color: #fff;
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  font-size: 24px;
-  letter-spacing: 0.6px;
-  padding-left: 20px;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .url-humanas .url-site:hover {
-  text-decoration: none;
-}
-#header-unal #menu-FCH .menu-superior .url-humanas .url-site::before {
-  background: no-repeat 0 0 url(../../images/header-unal/ubicacion.png);
-  content: "";
-  height: 18px;
-  position: absolute;
-  width: 11px;
-  top: 3px;
-  left: 0;
-}
-#header-unal #menu-FCH .menu-superior .buscador {
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  width: 250px;
-  float: right;
-  margin-top: 5px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only {
-  margin: 0;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools {
-  height: 30px;
-  margin: 0;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input {
-  background: #777 !important;
-  background-image: none !important;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  font-size: 14px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  text-indent: 3px !important;
-  width: 220px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  font-size: 15px !important;
-  color: #333;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input::-moz-placeholder {
-  /* Firefox 19+ */
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  font-size: 15px !important;
-  color: #333;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input:-ms-input-placeholder {
-  /* IE 10+ */
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  font-size: 15px !important;
-  color: #333;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input:-moz-placeholder {
-  /* Firefox 18- */
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  font-size: 15px !important;
-  color: #333;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box {
-  background-color: #777;
-  border-color: transparent;
-  color: #333;
-  height: 30px;
-  overflow: hidden !important;
-  padding-top: 1px;
-  width: 220px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody tr {
-  display: block;
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody .gsc-input {
-  font-size: 16px;
-  padding-top: 2px !important;
-  position: relative;
-  vertical-align: middle;
-  width: 90% !important;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody .gsib_a {
-  font-size: 16px;
-  height: 100%;
-  padding-top: 0;
-  position: absolute;
-  width: 100%;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody .gsib_b {
-  height: 20px;
-  position: absolute;
-  right: 0;
-  width: 20px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody .gsib_b .gsst_b {
-  height: 20px;
-  left: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  width: 20px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box .gstl_50 tbody .gsib_b .gsst_b .gsst_a {
-  height: 20px;
-  left: -5px;
-  padding: 0 !important;
-  position: absolute;
-  top: 6px;
-  width: 20px;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box-hover,
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box-focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-#header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-search-button {
-  border-radius: 0;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  vertical-align: middle;
-  width: 30px;
-}
-#header-unal #menu-FCH .items-menu {
-  padding: 0;
-  margin: 0;
-  position: relative;
-  width: calc(100% - 85px);
-}
-#header-unal #menu-FCH .items-menu .item {
-  display: block;
-  float: left;
-  font-family: "AncizarSans-Regular", Tahoma, Geneva, sans-serif;
-  list-style: none;
-  text-transform: uppercase;
-}
-#header-unal #menu-FCH .items-menu .item .item-name {
-  background-color: transparent;
-  color: #fff;
-  display: block;
-  font-size: 15.75px;
-  padding: 5px 13px;
-  position: relative;
-  text-decoration: none;
-  z-index: 50;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-#header-unal #menu-FCH .items-menu .item .item-name svg,
-#header-unal #menu-FCH .items-menu .item .item-name i {
-  color: #50992e;
-  font-size: 11px;
-  position: absolute;
-  right: 6px;
-  top: 10px;
-}
-#header-unal #menu-FCH .items-menu .item .item-name:hover,
-#header-unal #menu-FCH .items-menu .item .item-name:active,
-#header-unal #menu-FCH .items-menu .item .item-name:focus {
-  outline: none;
-}
-#header-unal #menu-FCH .items-menu .item .item_submenu {
-  filter: alpha(opacity=0);
-  opacity: 0;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  text-transform: initial;
-  visibility: hidden;
-  z-index: 10;
-  -webkit-transition: all 0.25s ease-in;
-  transition: all 0.25s ease-in;
-}
-#header-unal #menu-FCH .items-menu .item .item_submenu .sub-item {
-  list-style: none;
-}
-#header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a {
-  background-color: #333;
-  color: #fff;
-  display: block;
-  font-size: 15px;
-  padding: 4px 15px;
-  text-decoration: none;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-#header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a:hover,
-#header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a:active,
-#header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a:focus {
-  background-color: #555;
-  outline: none;
-}
-#header-unal #menu-FCH .items-menu .item:last-child {
-  float: right;
-}
-#header-unal #menu-FCH .items-menu .item:hover .item-name {
-  background-color: #555;
-}
-#header-unal #menu-FCH .items-menu .item:hover .item_submenu {
-  filter: alpha(opacity=100);
-  opacity: 1;
-  visibility: visible;
-  z-index: 5000;
-}
-#header-unal #menu-FCH .items-menu .has_submenu .item-name {
-  padding: 5px 22px 5px 7px;
-}
-#header-unal .escudo_colombia {
-  position: absolute;
-  right: 5px;
-  top: 6px;
+.shield-bg {
+  @apply relative;
 }
 
- @media screen and (max-width: 40em) {
+.logo {
+  @apply absolute top-1/3 right-1/2 translate-x-1/2 -translate-y-1/3 w-11/12;
+}
+/* Social */
+.social {
+  @apply bg-gray-unal-400 h-[30px] relative py-0 px-1 m-0 flex justify-end items-center;
+}
+
+.social a {
+  @apply bg-social h-5 w-5 block duration-150 ease-in-out ml-0.5;
+}
+
+.facebook {
+  @apply bg-[right_-42px_top_0] hover:bg-[right_-42px_top_-21px];
+}
+
+.twitter {
+  @apply bg-[left_-21px_top_0] hover:bg-[left_-21px_top_-21px];
+}
+
+.youtube {
+  @apply bg-[left_0_top_0] hover:bg-[left_0_top_-21px];
+}
+/* Menu items */
+#menu {
+  @apply ml-60 p-0 relative flex flex-col;
+}
+
+.top-menu {
+  @apply flex justify-between py-1.5;
+}
+
+.main-url {
+  @apply text-white text-2xl relative tracking-wide hover:no-underline flex items-center;
+}
+
+.items-menu {
+  @apply flex w-[calc(100%-85px)];
+}
+
+.items-menu .item {
+  @apply flex font-sans uppercase;
+  @apply hover:bg-gray-unal-300;
+  @apply last:ml-auto;
+}
+
+.item-name {
+  @apply relative text-white px-2.5 pt-2 pb-1 no-underline z-10 duration-300 ease-in-out;
+}
+
+.item-name .icon {
+  @apply text-green-unal text-xs right-1.5 top-2.5;
+}
+
+.item-submenu {
+  @apply absolute top-full opacity-0 p-0 invisible z-10 duration-200 ease-in overflow-hidden;
+}
+
+.items-menu .item:hover .item-submenu {
+  @apply opacity-100 visible z-20;
+}
+
+.sub-item a {
+  @apply bg-gray-unal-800 text-sm normal-case text-white block px-4 py-1 no-underline duration-200 ease-in-out;
+  @apply hover:bg-gray-unal-300;
+}
+
+.colombia {
+  @apply absolute right-1.5 top-1.5 w-16 h-16;
+}
+
+ /* @media screen and (max-width: 40em) {
   body {
       overflow-x: hidden;
   }
@@ -609,7 +343,7 @@ const headerItems: HeaderItem[] = [
       -webkit-transition-delay: 0s, 0.25s;
       transition-delay: 0s, 0.25s;
   }
-  #header-unal #menu-FCH {
+  #header-unal #menu {
       background-color: #484848;
       bottom: unset;
       left: unset;
@@ -618,51 +352,51 @@ const headerItems: HeaderItem[] = [
       width: 100%;
       z-index: 500;
   }
-  #header-unal #menu-FCH .menu-superior {
+  #header-unal #menu .menu-superior {
       width: 100%;
   }
-  #header-unal #menu-FCH .menu-superior .url-humanas {
+  #header-unal #menu .menu-superior .url-humanas {
       display: block;
       padding: 0 10px;
   }
-  #header-unal #menu-FCH .menu-superior .url-humanas .url-site {
+  #header-unal #menu .menu-superior .url-humanas .url-site {
       font-size: 20px;
       padding-bottom: 10px;
   }
-  #header-unal #menu-FCH .menu-superior .url-humanas .url-site::before {
+  #header-unal #menu .menu-superior .url-humanas .url-site::before {
       background-size: 90%;
       height: 15px;
       left: 5px;
       width: 10px;
   }
-  #header-unal #menu-FCH .menu-superior .buscador {
+  #header-unal #menu .menu-superior .buscador {
       padding: 0 15px;
       width: 100%;
   }
-  #header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input {
+  #header-unal #menu .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input {
       width: calc(100% - 30px);
   }
-  #header-unal #menu-FCH .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box {
+  #header-unal #menu .menu-superior .buscador .gsc-control-searchbox-only .gsc-search-box-tools .gsc-search-box tbody tr .gsc-input .gsc-input-box {
       width: 100%;
   }
-  #header-unal #menu-FCH .items-menu {
+  #header-unal #menu .items-menu {
       width: 100%;
   }
-  #header-unal #menu-FCH .items-menu .item {
+  #header-unal #menu .items-menu .item {
       border-bottom: 1px solid #666;
       float: unset;
   }
-  #header-unal #menu-FCH .items-menu .item .item-name {
+  #header-unal #menu .items-menu .item .item-name {
       padding: 8px 15px;
   }
-  #header-unal #menu-FCH .items-menu .item .item-name i {
+  #header-unal #menu .items-menu .item .item-name i {
       font-size: 15px;
       right: 20px;
       top: 12px;
       -webkit-transition: 0.25s ease-in-out;
       transition: 0.25s ease-in-out;
   }
-  #header-unal #menu-FCH .items-menu .item .item_submenu {
+  #header-unal #menu .items-menu .item .item_submenu {
       max-height: 0;
       opacity: 1;
       position: relative;
@@ -671,36 +405,36 @@ const headerItems: HeaderItem[] = [
       -webkit-transition: 0.25s ease-in-out;
       transition: 0.25s ease-in-out;
   }
-  #header-unal #menu-FCH .items-menu .item .item_submenu .sub-item {
+  #header-unal #menu .items-menu .item .item_submenu .sub-item {
       border-bottom: 1px solid #484848;
   }
-  #header-unal #menu-FCH .items-menu .item .item_submenu .sub-item a {
+  #header-unal #menu .items-menu .item .item_submenu .sub-item a {
       padding-left: 25px;
   }
-  #header-unal #menu-FCH .items-menu .item .item_submenu .sub-item:last-child {
+  #header-unal #menu .items-menu .item .item_submenu .sub-item:last-child {
       border-bottom: none;
   }
-  #header-unal #menu-FCH .items-menu .item .active {
+  #header-unal #menu .items-menu .item .active {
       max-height: 650px !important;
   }
-  #header-unal #menu-FCH .items-menu .item .active li {
+  #header-unal #menu .items-menu .item .active li {
       display: block !important;
   }
-  #header-unal #menu-FCH .items-menu .item:last-child {
+  #header-unal #menu .items-menu .item:last-child {
       float: unset;
   }
-  #header-unal #menu-FCH .items-menu .item:hover {
+  #header-unal #menu .items-menu .item:hover {
       background-color: #484848;
   }
-  #header-unal #menu-FCH .items-menu .has_submenu .item-name {
+  #header-unal #menu .items-menu .has_submenu .item-name {
       padding: 8px 15px;
   }
-  #header-unal #menu-FCH .items-menu .has_submenu .item-name:hover {
+  #header-unal #menu .items-menu .has_submenu .item-name:hover {
       background-color: transparent;
   }
-  #header-unal #menu-FCH .items-menu .selected .item-name {
+  #header-unal #menu .items-menu .selected .item-name {
       background-color: #666 !important;
   }
-}
+} */
 
 </style>

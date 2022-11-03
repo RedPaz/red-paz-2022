@@ -182,8 +182,8 @@ function setCurrentParent(index: number) {
 }
 
 .shield {
-  @apply relative;
-  @apply xl:absolute xl:h-[135px] xl:w-[234px] xl:z-10;
+  @apply static;
+  @apply xl:absolute xl:h-[135px] xl:w-[234px] xl:z-10 xl:top-0;
 }
 
 .shield-bg {
@@ -265,7 +265,7 @@ function setCurrentParent(index: number) {
 
 .top-menu {
   @apply flex flex-col justify-between py-1.5 w-full ;
-  @apply xl:flex-row xl:w-[calc(100%-85px)];
+  @apply xl:flex-row xl:w-[calc(100%-85px)] py-0.5;
 }
 
 .main-url {
@@ -324,7 +324,7 @@ function setCurrentParent(index: number) {
 }
 
 .colombia {
-  @apply hidden absolute right-1.5 top-1.5 w-16 h-16;
+  @apply hidden absolute right-1.5 top-2 w-16 h-16;
   @apply xl:block;
 }
 </style>

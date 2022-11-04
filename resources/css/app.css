@@ -8,7 +8,12 @@
   }
 
   body {
-    overflow-x: hidden;
+    @apply text-gray-unal-700 overflow-x-hidden;
+  }
+
+  .section-title {
+    @apply font-bold text-2xl mb-8;
+    @apply xl:text-center xl:text-5xl xl:mb-12;
   }
 
   @font-face {
@@ -33,7 +38,6 @@
          url('/public/fonts/AncizarSans-BoldItalic.eot?#iefix') format('embedded-opentype');
     font-weight: bold;
     font-style: italic;
-    font-style: normal;
   }
   
   @font-face {

@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
-    "./resources/**/*.js",
+    "./resources/**/*.ts",
     "./resources/**/*.vue",
   ],
   theme: {
@@ -18,9 +18,11 @@ module.exports = {
           400: '#5b5b5b',
           500: '#484848',
           600: '#383838',
+          700: '#3A3B3A',
           800: '#333333',
         },
         'green-unal': '#50992e',
+        'green-red': '#4DB372',
       },
       backgroundImage: {
         social: "url('/images/header-unal/redes_sociales.png')"
